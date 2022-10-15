@@ -20,22 +20,27 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package de.infaktum.feiertage.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Die Klasse beschreibt einen gesetzlichen Feiertag.
  * <br/>
  * Sie enthält den Feiertag und das Datum des Feiertags im entsprechenden Jahr.
  * <br/>
- * Um nach Feiertagen in einem bestimmten Zeitraum zu suchen, verwednen wir ein In-Memory-datenbank, in der alle Instanzen
- * von FeiertagsDatum gespeichert werden. Über ein CrudRepository stehen dann alle Suchfunktionen zur Verfügung.
+ * Um nach Feiertagen in einem bestimmten Zeitraum zu suchen, verwenden wir eine In-Memory-Datenbank,
+ * in der alle Instanzen von FeiertagsDatum gespeichert werden. Über ein CrudRepository stehen dann
+ * alle Suchfunktionen zur Verfügung.
  *
  * @author Heiko Sippel
  * @version 1.0
@@ -45,7 +50,7 @@ import java.util.Objects;
 public class FeiertagsDatum implements Serializable {
     public static final long serialVersionUID = 1L;
 
-    private final static Logger log = LoggerFactory.getLogger(FeiertagsDatum.class);
+    private static final Logger log = LoggerFactory.getLogger(FeiertagsDatum.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -115,15 +120,19 @@ public class FeiertagsDatum implements Serializable {
      */
     public boolean isWochenende() {
         log.trace("Test auf Wochenendede für {}", this);
-        return datum.getDayOfWeek() == DayOfWeek.SATURDAY ||
-                datum.getDayOfWeek() == DayOfWeek.SUNDAY;
+        return datum.getDayOfWeek() == DayOfWeek.SATURDAY
+            || datum.getDayOfWeek() == DayOfWeek.SUNDAY;
 
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FeiertagsDatum that)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FeiertagsDatum that)) {
+            return false;
+        }
 
         return getDatum().equals(that.getDatum());
     }

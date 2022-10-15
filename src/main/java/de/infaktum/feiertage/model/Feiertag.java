@@ -20,6 +20,30 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package de.infaktum.feiertage.model;
 
+import static de.infaktum.feiertage.model.Bundesland.baden_wuerttemberg;
+import static de.infaktum.feiertage.model.Bundesland.bayern;
+import static de.infaktum.feiertage.model.Bundesland.berlin;
+import static de.infaktum.feiertage.model.Bundesland.brandenburg;
+import static de.infaktum.feiertage.model.Bundesland.bremen;
+import static de.infaktum.feiertage.model.Bundesland.hamburg;
+import static de.infaktum.feiertage.model.Bundesland.hessen;
+import static de.infaktum.feiertage.model.Bundesland.mecklenburg_vorpommern;
+import static de.infaktum.feiertage.model.Bundesland.niedersachsen;
+import static de.infaktum.feiertage.model.Bundesland.nrw;
+import static de.infaktum.feiertage.model.Bundesland.rheinland_pfalz;
+import static de.infaktum.feiertage.model.Bundesland.saarland;
+import static de.infaktum.feiertage.model.Bundesland.sachsen;
+import static de.infaktum.feiertage.model.Bundesland.sachsen_anhalt;
+import static de.infaktum.feiertage.model.Bundesland.schleswig_holstein;
+import static de.infaktum.feiertage.model.Bundesland.thueringen;
+import static java.util.Calendar.AUGUST;
+import static java.util.Calendar.DECEMBER;
+import static java.util.Calendar.JANUARY;
+import static java.util.Calendar.MARCH;
+import static java.util.Calendar.MAY;
+import static java.util.Calendar.NOVEMBER;
+import static java.util.Calendar.OCTOBER;
+import static java.util.Calendar.SEPTEMBER;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -30,16 +54,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
-import static de.infaktum.feiertage.model.Bundesland.*;
-import static java.time.Month.*;
 
 /**
- * Die gesetzlichen deutschen Feiertage.<br/>
- * <p>
- * Die Klasse Feiertag enthält neben dem Namen des Feiertags auch eine Liste der Bundesländer, in der er gültig ist.
+ * Die gesetzlichen deutschen Feiertage.
+ *
+ * <p>Die Klasse Feiertag enthält neben dem Namen des Feiertags auch eine Liste der Bundesländer, in der er gültig ist.
  * Da viele Feiertage beweglich sind, wird das Datum nicht vorgehalten, sondern erst in der Klasse @FeiertagsDatum.
- * <br/>
- * Jeder Feiertag kann auch sein Datum in einem gegebenen Jahr berechnen.
+ * </p>
+ *
+ * <p>Jeder Feiertag kann auch sein Datum in einem gegebenen Jahr berechnen.
+ * </p>
  *
  * @author Heiko Sippel
  * @version 1.0
@@ -47,25 +71,36 @@ import static java.time.Month.*;
 
 
 public enum Feiertag {
+
     neujahr("Neujahr", x -> LocalDate.of(x, JANUARY, 1), Arrays.asList(Bundesland.values())),
-    allerheiligen("Allerheiligen", x -> LocalDate.of(x, NOVEMBER, 1), Arrays.asList(baden_wuerttemberg, bayern, nrw, rheinland_pfalz, saarland)),
+    allerheiligen("Allerheiligen", x -> LocalDate.of(x, NOVEMBER, 1),
+        Arrays.asList(baden_wuerttemberg, bayern, nrw, rheinland_pfalz, saarland)),
     frauentag("Internationaler Frauentag", x -> LocalDate.of(x, MARCH, 8), List.of(berlin)),
     weltkindertag("Weltkindertag", x -> LocalDate.of(x, SEPTEMBER, 20), List.of(thueringen)),
     maifeiertag("Tag der Arbeit", x -> LocalDate.of(x, MAY, 1), Arrays.asList(Bundesland.values())),
     maria_himmelfahrt("Maria Himmelfahrt", x -> LocalDate.of(x, AUGUST, 15), List.of(saarland)),
-    dreikoenigstag("Heilige drei Könige", x -> LocalDate.of(x, JANUARY, 6), Arrays.asList(bayern, baden_wuerttemberg)),
-    nationalfeiertag("Tag der deutschen Einheit", x -> LocalDate.of(x, OCTOBER, 3), Arrays.asList(Bundesland.values())),
-    reformationstag("Reformationstag", x -> LocalDate.of(x, OCTOBER, 31), Arrays.asList(brandenburg, bremen, hamburg, mecklenburg_vorpommern, niedersachsen, sachsen, sachsen_anhalt, schleswig_holstein, thueringen)),
-    heiligabend("Heiligabend", x -> LocalDate.of(x, DECEMBER, 24), Arrays.asList(Bundesland.values())),
-    weihnachtstag1("1. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 25), Arrays.asList(Bundesland.values())),
-    weihnachtstag2("2. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 26), Arrays.asList(Bundesland.values())),
-    silvester("2. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 31), Arrays.asList(Bundesland.values())),
+    dreikoenigstag("Heilige drei Könige", x -> LocalDate.of(x, JANUARY, 6),
+        Arrays.asList(bayern, baden_wuerttemberg)),
+    nationalfeiertag("Tag der deutschen Einheit", x -> LocalDate.of(x, OCTOBER, 3),
+        Arrays.asList(Bundesland.values())),
+    reformationstag("Reformationstag", x -> LocalDate.of(x, OCTOBER, 31),
+        Arrays.asList(brandenburg, bremen, hamburg, mecklenburg_vorpommern, niedersachsen, sachsen, sachsen_anhalt,
+            schleswig_holstein, thueringen)),
+    heiligabend("Heiligabend", x -> LocalDate.of(x, DECEMBER, 24),
+        Arrays.asList(Bundesland.values())),
+    weihnachtstag1("1. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 25),
+        Arrays.asList(Bundesland.values())),
+    weihnachtstag2("2. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 26),
+        Arrays.asList(Bundesland.values())),
+    silvester("2. Weihnachtstag", x -> LocalDate.of(x, DECEMBER, 31),
+        Arrays.asList(Bundesland.values())),
     //    rosenmontag("Rosenmontag", x -> ostern(x, -29), Arrays.asList(Bundesland.nrw)),
     karfreitag("Karfreitag", x -> ostern(x, -2), Arrays.asList(Bundesland.values())),
     //    ostersonntag("Ostersonntag", x -> ostern(x, 0), Arrays.asList()),
     ostermontag("Ostermontag", x -> ostern(x, 1), Arrays.asList(Bundesland.values())),
     christi_himmelfahrt("Christi Himmelfahrt", x -> ostern(x, 40), Arrays.asList(Bundesland.values())),
-    fronleichnam("Fronleichnam", x -> ostern(x, 60), Arrays.asList(baden_wuerttemberg, bayern, Bundesland.hessen, Bundesland.nrw, Bundesland.rheinland_pfalz, Bundesland.saarland)),
+    fronleichnam("Fronleichnam", x -> ostern(x, 60), Arrays.asList(baden_wuerttemberg, bayern,
+        hessen, nrw, rheinland_pfalz, saarland)),
     //    pfingstsonntag("Pfingstsonntag", x -> ostern(x, 49), Arrays.asList(Bundesland.values())),
     pfingstmontag("Pfingstmontag", x -> ostern(x, 50), Arrays.asList(Bundesland.values())),
     buss_und_bettag("Buß- und Bettag", Feiertag::bussUndBettag, List.of(sachsen));
@@ -77,7 +112,6 @@ public enum Feiertag {
     private final String bezeichnung;
     private final List<Bundesland> laender;
     private final Function<Integer, LocalDate> datum;
-
 
     /**
      * Erzeugt eine neue Fnstanz.
@@ -96,6 +130,7 @@ public enum Feiertag {
      *
      * @param jahr   Das Jahr.
      * @param offset Ein möglicher Offset in Tagen. Für Ostersonntag ist offset = 0.
+     *
      * @return Das Datum.
      */
 
@@ -132,6 +167,7 @@ public enum Feiertag {
      * Liefert das Datum des Buß- und Bettags (Mittwoch vor dem 1. Advent) im gegebenen Jahr.
      *
      * @param jahr Das Jahr, für das die Feiertage berechnet werden sollen
+     *
      * @return Das Datum des Buß- und Bettags.
      */
 
@@ -154,6 +190,7 @@ public enum Feiertag {
      * Liefert das Datum des Feiertags im gegeben Jahr..
      *
      * @param jahr Das Jahr.
+     *
      * @return Das Datum des Feiertags im Jahr.
      */
     public LocalDate datum(final int jahr) {
@@ -173,6 +210,7 @@ public enum Feiertag {
      * Überprüft, ob der Feiertag in einem Bundesland gültig ist.
      *
      * @param land Das Land
+     *
      * @return true, wenn der Feiertag im Land gültig ist.
      */
     public boolean isFeiertagIn(final Land land) {

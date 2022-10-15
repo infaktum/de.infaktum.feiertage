@@ -20,14 +20,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package de.infaktum.feiertage.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Generische Implementierung, die alle Feiertage aus einem Repository holt.
@@ -38,8 +37,8 @@ import java.util.stream.Collectors;
  */
 
 public abstract class FeiertageGenericImpl implements Feiertage {
-    protected final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    private final static Logger log = LoggerFactory.getLogger(FeiertageGenericImpl.class);
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static final Logger log = LoggerFactory.getLogger(FeiertageGenericImpl.class);
     @Autowired
     private FeiertagsDatumRepository repository;
 
@@ -48,6 +47,7 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      *
      * @param datum Das Datum.
      * @param land  Das Land.
+     *
      * @return true, falls es sich um einen Feiertag handelt.
      */
     @Override
@@ -61,6 +61,7 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      *
      * @param datum Das Datum als String.
      * @param land  Das Land.
+     *
      * @return Das gefundene Objekt.
      */
     @Override
@@ -73,14 +74,16 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      *
      * @param datum Das Datum.
      * @param land  Das Land.
+     *
      * @return Das gefundene Objekt.
      */
     @Override
     public FeiertagsDatum getFeiertag(final LocalDate datum, final Land land) {
         FeiertagsDatum feiertagsDatum = repository.findByDatum(datum);
-        log.debug("Gefundener Feiertag: {}",feiertagsDatum);
-        if(feiertagsDatum == null)
+        log.debug("Gefundener Feiertag: {}", feiertagsDatum);
+        if (feiertagsDatum == null) {
             return null;
+        }
         List<FeiertagsDatum> feiertagsData = filter(List.of(feiertagsDatum), land);
         return feiertagsData.isEmpty() ? null : feiertagsData.get(0);
     }
@@ -91,6 +94,7 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      * @param von  Das Anfangs-Datum.
      * @param bis  Das End-Datum.
      * @param land Das Land
+     *
      * @return Die Liste gefundener Objekte.
      */
 
@@ -105,6 +109,7 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      * @param von  Das Anfangs-Datum.
      * @param bis  Das End-Datum.
      * @param land Das Land
+     *
      * @return Die Liste gefundener Objekte.
      */
     @Override
@@ -117,6 +122,7 @@ public abstract class FeiertageGenericImpl implements Feiertage {
      *
      * @param feiertagsData Die Liste der FeiertagsDatums-Objekte
      * @param land          Das Land.
+     *
      * @return Alle Feiertage, die im Bundesland gültig sind.
      */
     private List<FeiertagsDatum> filter(final List<FeiertagsDatum> feiertagsData, final Land land) {

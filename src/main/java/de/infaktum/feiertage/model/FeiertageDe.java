@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FeiertageDe extends FeiertageGenericImpl {
-    private final static Logger log = LoggerFactory.getLogger(FeiertageDe.class);
+    private static final Logger log = LoggerFactory.getLogger(FeiertageDe.class);
 
     @Autowired
     private FeiertagsDatumRepository repository;

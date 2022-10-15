@@ -20,6 +20,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package de.infaktum.feiertage.model;
 
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
 
 /**
  * Die Anwendung startet die Web-Applikation.
@@ -43,7 +42,7 @@ public class Application {
     /**
      * Boots the web app.
      *
-     * @param args Optional parameters
+     * @param args Optionale Parameter
      */
     public static void main(String... args) {
         SpringApplication.run(Application.class, args);
@@ -54,7 +53,7 @@ public class Application {
      */
     @RestController
     public static class Controller {
-        private final static Logger log = LoggerFactory.getLogger(Controller.class);
+        private static final Logger log = LoggerFactory.getLogger(Controller.class);
         @Autowired
         private Feiertage feiertage;
 
@@ -66,16 +65,33 @@ public class Application {
             feiertage.init(2100);
         }
 
+        /**
+         * Mapping für die Url /feiertag. Ein einzelner Tag wird abgefragt.
+         *
+         * @param datum Das Datum des abgefragten Feiertags.
+         * @param land  Das Bundesland.
+         *
+         * @return Informationen über den Tag als Feiertag.
+         */
         @GetMapping("/feiertag")
         public FeiertagsDatum feiertag(
-                @RequestParam final String datum, @RequestParam final String land) {
+            @RequestParam final String datum, @RequestParam final String land) {
             log.info("Request-Parameter datum {}, Land {}", datum, Land.getlandByKuerzel(land));
             return feiertage.getFeiertag(datum, Land.getlandByKuerzel(land));
         }
 
+        /**
+         * Mapping für die Url /feiertage. Ein einzelner Tag wird abgefragt.
+         *
+         * @param von  Das Datum des ersten Tags des Bereichs.
+         * @param bis  Das Datum des zweiten Tags des Bereichs.
+         * @param land Das Bundesland.
+         *
+         * @return Informationen über die Feiertage zwischen den beiden Tagen.
+         */
         @GetMapping("/feiertage")
         public List<FeiertagsDatum> feiertage(
-                @RequestParam final String von, @RequestParam final String bis, @RequestParam final String land) {
+            @RequestParam final String von, @RequestParam final String bis, @RequestParam final String land) {
             log.info("Request-Parameter von {} bis {}, Land {}", von, bis, Land.getlandByKuerzel(land));
             return feiertage.getFeiertage(von, bis, Land.getlandByKuerzel(land));
         }

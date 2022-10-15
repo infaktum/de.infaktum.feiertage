@@ -20,10 +20,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package de.infaktum.feiertage.model;
 
-import org.springframework.data.repository.CrudRepository;
-
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+
 
 /**
  * Repository für die FeiertagsDatums-Objekte. Die Implementierung erfolgt durch Spring Boot.<br/>
@@ -41,6 +41,7 @@ public interface FeiertagsDatumRepository extends CrudRepository<FeiertagsDatum,
      * Findet einen Feiertag durch das Datum.
      *
      * @param datum Das Datum.
+     *
      * @return Das gefundene Objekt.
      */
     FeiertagsDatum findByDatum(final LocalDate datum);
@@ -50,6 +51,7 @@ public interface FeiertagsDatumRepository extends CrudRepository<FeiertagsDatum,
      *
      * @param von Das Anfangs-Datum.
      * @param bis Das End-Datum.
+     *
      * @return Die Liste gefundener Objekte.
      */
 

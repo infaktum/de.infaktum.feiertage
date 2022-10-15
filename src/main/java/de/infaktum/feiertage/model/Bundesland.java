@@ -21,12 +21,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package de.infaktum.feiertage.model;
 
 /**
- * Die deutschen Bundesländer als Enumeration. Neben dem Namen wird auch der offizielle Schlüssel und das zweibuchstabige
- * Kürzel gespeichert.<br/>
- * <p>
- * Es gibt zwei statisch Methoden, über die ein Bundesland ruch den Schlüssel und das Kürzel bestimmt werden kann.<br/>
- * <p>
- * Die Werte für Schlüssel und Kürzel findet man etwa bei DESTATIS.
+ * Die deutschen Bundesländer als Enumeration. Neben dem Namen wird auch der offizielle Schlüssel und das
+ * Kürzel gespeichert.
+ *
+ * <p>Es gibt zwei statisch Methoden, über die ein Bundesland ruch den Schlüssel und das Kürzel bestimmt werden kann.
+ *
+ * <p>Die Werte für Schlüssel und Kürzel findet man etwa bei DESTATIS.
  *
  *  <ul>
  *  <li>01 Schleswig-Holstein(NI)</li>
@@ -122,6 +122,7 @@ public enum Bundesland implements Land {
 
     @Override
     public String toString() {
-        return "Bundesland{ schluessel= " + schluessel + ", kuerzel = " + kuerzel + ", bezeichnung='" + bezeichnung + '}';
+        return "Bundesland{ schluessel= " + schluessel + ", kuerzel = " + kuerzel + ", bezeichnung='"
+            + bezeichnung + '}';
     }
 }
